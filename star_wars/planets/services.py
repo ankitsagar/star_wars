@@ -103,4 +103,5 @@ class UserPlanetService:
         return user_planet
 
     def get_planet_ids_from_user_planet(self, user_id):
-        return self.get_user_planets(user_id).values_list("planet_id", flat=True)
+        return self.get_user_planets(user_id).values_list(
+            "planet_id", flat=True)

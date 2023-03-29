@@ -22,7 +22,8 @@ class Movie(BaseEntity):
 
 
 class UserMovie(CommonUserData):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(
+        Movie, on_delete=models.CASCADE, related_name="user_movies")
 
     class meta:
         db_table = 'user_movies'
