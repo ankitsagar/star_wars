@@ -3,6 +3,7 @@ from django.db import models
 
 # App
 from core.models import BaseEntity
+from movies import constants
 from users.models import CommonUserData
 
 
@@ -23,7 +24,9 @@ class Movie(BaseEntity):
 
 class UserMovie(CommonUserData):
     movie = models.ForeignKey(
-        Movie, on_delete=models.CASCADE, related_name="user_movies")
+        Movie,
+        on_delete=models.CASCADE,
+        related_name=constants.MOVIE_TO_USER_REL)
 
     class meta:
         db_table = 'user_movies'

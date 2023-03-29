@@ -7,17 +7,16 @@ from rest_framework import status
 
 # App
 from users.services import UserService
-from planets.services import PlanetService, UserPlanetService
+from planets.services import PlanetService
 
 
 class PlanetListTestCase(APITestCase):
-    fixtures = ['users.yaml', 'movies.json', 'planets.json']
+    fixtures = ['users.yaml', 'planets.json']
 
     def setUp(self):
         self.user_service = UserService()
         self.planet_service = PlanetService()
-        self.user_planet_service = UserPlanetService()
-        self.user = self.user_service.get_all_user().first()
+        self.user = self.user_service.get_all().first()
         self.url = reverse(
             'planets:get_planets', kwargs={"user_id": self.user.id})
         self.invalid_user_url = reverse(
@@ -32,15 +31,15 @@ class PlanetListTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_search_without_custom_name(self):
-        planet = self.planet_service.get_all_planets().first()
+        planet = self.planet_service.get_all().first()
         response = self.client.get(self.url, {"query": planet.name})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.json()['results']), 1)
 
     def test_search_with_custom_name(self):
-        planet = self.planet_service.get_all_planets().first()
-        user_planet = self.user_planet_service.create_or_update_user_planet(
-            planet=planet,
+        planet = self.planet_service.get_all().first()
+        user_planet = self.planet_service.create_or_update_user_metadata_entry(
+            model_instance=planet,
             user=self.user,
             is_favorite=True,
             custom_name="some_random_name"
@@ -51,9 +50,9 @@ class PlanetListTestCase(APITestCase):
         self.assertEqual(len(response.json()['results']), 1)
 
     def test_search_custom_planet_by_orignal_name(self):
-        planet = self.planet_service.get_all_planets().first()
-        self.user_planet_service.create_or_update_user_planet(
-            planet=planet,
+        planet = self.planet_service.get_all().first()
+        self.planet_service.create_or_update_user_metadata_entry(
+            model_instance=planet,
             user=self.user,
             is_favorite=False,
             custom_name="some_random_name"
@@ -64,21 +63,20 @@ class PlanetListTestCase(APITestCase):
 
 
 class UserPlanetCreateTestCase(APITestCase):
-    fixtures = ['users.yaml', 'movies.json', 'planets.json']
+    fixtures = ['users.yaml', 'planets.json']
 
     def setUp(self):
         self.user_service = UserService()
         self.planet_service = PlanetService()
-        self.user_planet_service = UserPlanetService()
-        self.user = self.user_service.get_all_user().first()
-        self.palnet = self.planet_service.get_all_planets().first()
+        self.user = self.user_service.get_all().first()
+        self.palnet = self.planet_service.get_all().first()
         self.url = reverse(
             'planets:create_user_planet',
-            kwargs={"planet_id": self.palnet.id}
+            kwargs={"pk": self.palnet.id}
         )
         self.invalid_planet_url = reverse(
             'planets:create_user_planet',
-            kwargs={"planet_id": 9999999999}
+            kwargs={"pk": 9999999999}
         )
 
     def test_invalid_planet(self):

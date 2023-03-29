@@ -3,6 +3,7 @@ from django.db import models
 
 # App
 from core.models import BaseEntity
+from planets import constants
 from users.models import CommonUserData
 
 
@@ -25,7 +26,9 @@ class Planet(BaseEntity):
 
 class UserPlanet(CommonUserData):
     planet = models.ForeignKey(
-        Planet, on_delete=models.CASCADE, related_name='user_planets')
+        Planet,
+        on_delete=models.CASCADE,
+        related_name=constants.PLANET_TO_USER_REL)
 
     class meta:
         db_table = 'user_planets'

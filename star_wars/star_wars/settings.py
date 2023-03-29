@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'core',
     'planets',
     'movies',
-    'users'
+    'users',
+    'common'
 ]
 
 MIDDLEWARE = [
