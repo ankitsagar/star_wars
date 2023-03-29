@@ -1,5 +1,9 @@
+# Django
 from django.db import models
+
+# App
 from core.models import BaseEntity
+from users.models import CommonUserData
 
 
 class Planet(BaseEntity):
@@ -12,8 +16,18 @@ class Planet(BaseEntity):
     terrain = models.CharField(max_length=40)
     surface_water = models.CharField(max_length=40)
     population = models.CharField(max_length=40)
-    # Planet id in the star wars API
-    sw_planet_id = models.PositiveIntegerField()
+    url = models.CharField(max_length=500)
 
     class Meta:
         db_table = 'planet'
+        ordering = ('name',)
+
+
+class UserPlanet(CommonUserData):
+    planet = models.ForeignKey(
+        Planet, on_delete=models.CASCADE, related_name='user_planets')
+
+    class meta:
+        db_table = 'user_planets'
+        ordering = ('custom_name',)
+        unique_together = (('user_id', 'planet_id'), )

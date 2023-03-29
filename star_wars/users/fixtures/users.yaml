@@ -1,0 +1,10 @@
+- fields:
+    name: ankit
+    email: ankit@test.com
+  model:
+    users.user
+- fields:
+    name: sagar
+    email: sagar@test.com
+  model:
+    users.user

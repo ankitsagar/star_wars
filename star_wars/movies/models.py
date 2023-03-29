@@ -1,7 +1,9 @@
+# Django
 from django.db import models
-from core.models import BaseEntity
 
-# Create your models here.
+# App
+from core.models import BaseEntity
+from users.models import CommonUserData
 
 
 class Movie(BaseEntity):
@@ -12,7 +14,17 @@ class Movie(BaseEntity):
     producer = models.CharField(max_length=100)
     release_date = models.DateField()
     # Film id in the star wars API
-    sw_movie_id = models.PositiveIntegerField()
+    url = models.CharField(max_length=500)
 
     class Meta:
         db_table = 'movie'
+        ordering = ('title', )
+
+
+class UserMovie(CommonUserData):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    class meta:
+        db_table = 'user_movies'
+        ordering = ('custom_name',)
+        unique_together = (('user_id', 'movie_id'), )

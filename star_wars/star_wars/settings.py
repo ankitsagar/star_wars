@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_extensions',
     'core',
     'planets',
-    'movies'
+    'movies',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -78,8 +81,12 @@ WSGI_APPLICATION = 'star_wars.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'star_wars',
+        'USER': 'choosen_one',
+        'PASSWORD': 'last_jedi',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -126,3 +133,19 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (),  # Not implementing any auth
+    'DEFAULT_PERMISSION_CLASSES': (),
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'COERCE_DECIMAL_TO_STRING': False
+}
+
+
+SW_API_BASE_URL = "https://swapi.dev/api/"
+SW_PLANETS_ENDPOINT = "planets/"
+SW_MOVIES_ENDPOINT = "films/"

@@ -1,7 +1,8 @@
+# Django
 from django.db import models
+
+# App
 from core.models import BaseEntity
-from planets.models import Planet
-from movies.models import Movie
 
 
 class User(BaseEntity):
@@ -20,17 +21,3 @@ class CommonUserData(BaseEntity):
 
     class Meta:
         abstract = True
-
-
-class UserMovie(CommonUserData):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-
-    class meta:
-        db_table = 'user_movies'
-
-
-class UserPlanet(CommonUserData):
-    planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
-
-    class meta:
-        db_table = 'user_planets'
