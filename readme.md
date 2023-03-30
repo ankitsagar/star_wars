@@ -44,16 +44,20 @@ $ poetry install
 $ cd star_wars
 ```
 
-4. Run the app:
+5. Populate all required data to db:
+```
+$ python manage.py load_data
+$ python manage.py loaddata users
+```
 
+6. Run the app:
 ```
 $ python manage.py runserver
 ```
 
 *App will be available on port 8000*
 
-4. Run test:
-
+7. Run test:
 ```
 $ python manage.py test
 ```
