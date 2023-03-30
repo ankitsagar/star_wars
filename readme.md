@@ -28,7 +28,7 @@ postgres=# ALTER USER choosen_one CREATEDB;
 
 2. Clone the repository:
 ```
-$ https://github.com/ankitsagar/star_wars.git
+$ git clone https://github.com/ankitsagar/star_wars.git
 ```
 
 3. Go to the cloned directory:
@@ -74,7 +74,7 @@ $ python manage.py test
 
 1. Clone the repository:
 ```
-$ https://github.com/ankitsagar/star_wars.git
+$ git clone https://github.com/ankitsagar/star_wars.git
 ```
 
 2. I am using shared folders to enable live code reloading. Without this, Docker Compose will not start:
