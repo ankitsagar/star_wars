@@ -1,5 +1,6 @@
 # Django
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 # App
 from core.models import BaseEntity
@@ -17,6 +18,7 @@ class Planet(BaseEntity):
     terrain = models.CharField(max_length=40)
     surface_water = models.CharField(max_length=40)
     population = models.CharField(max_length=40)
+    films = ArrayField(models.CharField(max_length=500), null=True)
     url = models.CharField(max_length=500)
 
     class Meta:
