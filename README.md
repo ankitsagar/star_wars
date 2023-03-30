@@ -41,25 +41,39 @@ $ cd star_wars
 $ poetry install
 ```
 
-4. Go to app folder:
+4. Activate virtual env:
+```
+$ source $(poetry env info --path)/bin/activate
+```
+  For fish shell
+```
+$ source $(poetry env info --path)/bin/activate.fish
+```
+
+5. Go to app folder:
 ```
 $ cd star_wars
 ```
 
-5. Populate all required data to db:
+6. Run migrations:
+```
+$ python manage.py migrate
+```
+
+7. Populate all required data to db:
 ```
 $ python manage.py load_data
 $ python manage.py loaddata users
 ```
 
-6. Run the app:
+8. Run the app:
 ```
 $ python manage.py runserver
 ```
 
 *App will be available on port 8000*
 
-7. Run test:
+9. Run test:
 ```
 $ python manage.py test
 ```
