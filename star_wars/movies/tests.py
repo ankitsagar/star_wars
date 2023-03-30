@@ -11,7 +11,7 @@ from users.services import UserService
 
 
 class MovieListTestCase(APITestCase):
-    fixtures = ['users.yaml', 'movies.json']
+    fixtures = ['users.json', 'movies.json']
 
     def setUp(self):
         self.user_service = UserService()
@@ -63,7 +63,7 @@ class MovieListTestCase(APITestCase):
 
 
 class UserMovieCreateTestCase(APITestCase):
-    fixtures = ['users.yaml', 'movies.json']
+    fixtures = ['users.json', 'movies.json']
 
     def setUp(self):
         self.user_service = UserService()

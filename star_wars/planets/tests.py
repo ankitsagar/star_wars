@@ -11,7 +11,7 @@ from planets.services import PlanetService
 
 
 class PlanetListTestCase(APITestCase):
-    fixtures = ['users.yaml', 'planets.json']
+    fixtures = ['users.json', 'planets.json']
 
     def setUp(self):
         self.user_service = UserService()
@@ -63,7 +63,7 @@ class PlanetListTestCase(APITestCase):
 
 
 class UserPlanetCreateTestCase(APITestCase):
-    fixtures = ['users.yaml', 'planets.json']
+    fixtures = ['users.json', 'planets.json']
 
     def setUp(self):
         self.user_service = UserService()
