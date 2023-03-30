@@ -2,7 +2,7 @@
 name = "star-wars"
 version = "0.1.0"
 description = "Application to fetch all start wars planets and movies"
-authors = ["Ankit Sagar <ankit@fyxee.com>"]
+authors = ["Ankit Sagar <ankitsagar15@gmail.com>"]
 readme = "README.md"
 packages = [{include = "star_wars"}]
 
