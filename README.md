@@ -2,6 +2,8 @@
 
 ## Postman Collection
   https://elements.getpostman.com/redirect?entityId=24358209-d121d8de-3e9f-4290-88a4-bb55dc733f92&entityType=collection
+  
+  Additionally you can visit http://127.0.0.1:8000/api/v1/docs/ for swagger UI
 
 ## _Installation and setup process_
 
