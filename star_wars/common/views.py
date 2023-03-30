@@ -1,6 +1,6 @@
 # DRF
-from rest_framework.exceptions import NotFound
-from rest_framework.generics import ListAPIView, UpdateAPIView
+from rest_framework.exceptions import NotFound, MethodNotAllowed
+from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.response import Response
 
 # App
@@ -30,7 +30,7 @@ class BaseUserMetaDataListView(ListAPIView):
         return response
 
 
-class BaseUserMetaDataCreateView(UpdateAPIView):
+class BaseUserMetaDataCreateView(CreateAPIView):
     serializer_class = None
     model_service_class = None
     not_found_error = None
@@ -40,7 +40,7 @@ class BaseUserMetaDataCreateView(UpdateAPIView):
         super().__init__(*args, **kwargs)
         self.model_service = self.model_service_class()
 
-    def put(self, request, pk, *args, **kwargs):
+    def post(self, request, pk, *args, **kwargs):
         instance = self.model_service.get_by_id(pk)
         if not instance:
             raise NotFound(detail=self.not_found_error)

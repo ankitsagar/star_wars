@@ -80,7 +80,7 @@ class UserMovieCreateTestCase(APITestCase):
         )
 
     def test_invalid_movie(self):
-        response = self.client.put(
+        response = self.client.post(
             self.invalid_movie_url,
             {
                 "user": self.user.id,
@@ -89,7 +89,7 @@ class UserMovieCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_invalid_user(self):
-        response = self.client.put(
+        response = self.client.post(
             self.url,
             {
                 "user": 99999999,
@@ -98,7 +98,7 @@ class UserMovieCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_set_movie_favourite(self):
-        response = self.client.put(
+        response = self.client.post(
             self.url,
             {
                 "user": self.user.id,
@@ -107,7 +107,7 @@ class UserMovieCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_set_planet_favourite_with_custom_name(self):
-        response = self.client.put(
+        response = self.client.post(
             self.url,
             {
                 "user": self.user.id,
