@@ -7,6 +7,10 @@ class BaseService:
     model = None
 
     def get_by_id(self, obj_id: int):
+        """
+        Get the single entry of the model using id field,
+        return None if not found
+        """
         try:
             obj = self.model.objects.get(id=obj_id)
         except ObjectDoesNotExist:
@@ -14,6 +18,7 @@ class BaseService:
         return obj
 
     def get_all(self):
+        """ Returns all entries of the model """
         return self.model.objects.all()
 
     def bulk_create(self, data):
@@ -25,6 +30,7 @@ class BaseService:
         fields = [field.name for field in self.model._meta.get_fields()]
         for d in data:
             for key in list(d.keys()):
+                # Remove keys which are not present as field
                 if key not in fields:
                     d.pop(key)
             objs.append(self.model(**d))
@@ -39,10 +45,10 @@ class BaseServiceWithUserMedataModel(BaseService):
     model_field_in_user_metadata = None
     model_name_field = None
 
-    def get_with_user_metadata_entries(self, user, query=None):
+    def get_model_with_user_metadata_entries(self, user, query=None):
         """
-        Fetches all the model instances with user level relation object if
-        there are entries.
+        Returns all the model entries with user level metadata entries using
+        prefetch.
         """
         filter_args = []
         if query:
@@ -86,7 +92,7 @@ class BaseServiceWithUserMedataModel(BaseService):
         return objs
 
     def get_user_metadata_entries(self, user_id, query=None):
-        """ Return all the entries related to the user """
+        """ Returns all user level metatdata entries related to the user """
         queryset = self.user_level_metadata_model.objects.filter(
             user_id=user_id)
         if query:
@@ -94,6 +100,7 @@ class BaseServiceWithUserMedataModel(BaseService):
         return queryset
 
     def get_user_metdata_entry(self, user_id, model_id):
+        """ Returns single user level metatdata entry related to the user """
         try:
             user_metadata_entry = self.user_level_metadata_model.objects.get(
                 **{
@@ -107,6 +114,10 @@ class BaseServiceWithUserMedataModel(BaseService):
 
     def create_or_update_user_metadata_entry(
             self, model_instance, user, is_favorite, custom_name=None):
+        """
+        Creates user level metadata entry if not found else updates with the
+        new given data
+        """
         user_metadata_entry = self.get_user_metdata_entry(
             user.id, model_instance.id)
         if not user_metadata_entry:

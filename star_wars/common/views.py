@@ -22,7 +22,7 @@ class BaseUserMetaDataListView(ListAPIView):
         user = self.user_service.get_by_id(user_id)
         if not user:
             raise NotFound(detail="user id not found")
-        queryset = self.model_service.get_with_user_metadata_entries(
+        queryset = self.model_service.get_model_with_user_metadata_entries(
             user=user, query=query)
         page = self.paginate_queryset(queryset)
         serializer = self.serializer_class(page, many=True)
