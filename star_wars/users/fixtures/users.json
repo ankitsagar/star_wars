@@ -1,0 +1,22 @@
+[
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "created_time": null,
+        "updated_time": null,
+        "name": "ankit",
+        "email": "ankit@test.com"
+    }
+},
+{
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+        "created_time": null,
+        "updated_time": null,
+        "name": "sagar",
+        "email": "sagar@test.com"
+    }
+}
+]
