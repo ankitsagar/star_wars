@@ -5,12 +5,14 @@
 
 ## _Installation and setup process_
 
-## Requirements
+## Manual
+
+### Requirements
 
 1. [PostgreSQL](https://www.postgresql.org/download/)
 2. [Poetry](https://python-poetry.org/docs/)
 
-## How to run it?
+### How to run it?
 
 1. Create a database and user:
 ```
@@ -26,7 +28,7 @@ postgres=# ALTER USER choosen_one CREATEDB;
 
 2. Clone the repository:
 ```
-$ https://github.com/ankitsagar/star_wars.git
+$ git clone https://github.com/ankitsagar/star_wars.git
 ```
 
 3. Go to the cloned directory:
@@ -61,3 +63,35 @@ $ python manage.py runserver
 ```
 $ python manage.py test
 ```
+
+## With Docker
+
+### Requirements
+1. [Docker](https://docs.docker.com/install/)
+2. [Docker Compose](https://docs.docker.com/compose/install/)
+
+### How to run it?
+
+1. Clone the repository:
+```
+$ git clone https://github.com/ankitsagar/star_wars.git
+```
+
+2. I am using shared folders to enable live code reloading. Without this, Docker Compose will not start:
+    - Windows/MacOS: Add the cloned `star_wars` directory to Docker shared directories (Preferences -> Resources -> File sharing).
+    - Windows/MacOS: Make sure that in Docker preferences you have dedicated at least 1 GB of memory (Preferences -> Resources -> Advanced).
+    - Linux: No action required, sharing already enabled and memory for Docker engine is not limited.
+
+3. Go to the cloned directory:
+```
+$ cd star_wars
+```
+4. Build the application:
+```
+$ docker-compose build
+```
+5. Run the application:
+```
+$ docker-compose up
+```
+*All the components might take up to few minutes for them to compile depending on your CPU, After it's done app will be available on port 8000*
