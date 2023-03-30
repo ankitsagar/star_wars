@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  api:
+    ports:
+      - 8000:8000
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    entrypoint: ./api-entrypoint.sh
+    tty: true
+    volumes:
+      - ./star_wars:/app/star_wars
+    environment:
+      - DB_HOST=db
+  db:
+    image: postgres:13.4-alpine
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=star_wars
+      - POSTGRES_USER=choosen_one
+      - POSTGRES_PASSWORD=last_jedi
+    restart: unless-stopped
+
+
